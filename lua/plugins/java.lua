@@ -1,29 +1,27 @@
-if true then
-  return {}
-end
-
 return {
-  "nvim-treesitter/nvim-treesitter",
-  opts = {
-    ensure_installed = { "java", "groovy" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = { "java", "groovy" },
+    },
   },
-  "nvim-java/nvim-java",
-  config = false,
-  dependencies = {
-    {
-      "neovim/nvim-lspconfig",
-      opts = {
-        servers = {
-          jdtls = {
-            -- your jdtls configuration goes here
+  {
+    "nvim-java/nvim-java",
+    config = false,
+    dependencies = {
+      {
+        "neovim/nvim-lspconfig",
+        opts = {
+          servers = {
+            jdtls = {
+              -- your jdtls configuration goes here
+            },
           },
-        },
-        setup = {
-          jdtls = function()
-            require("java").setup({
-              -- your nvim-java configuration goes here
-            })
-          end,
+          setup = {
+            jdtls = function()
+              require("java").setup()
+            end,
+          },
         },
       },
     },
