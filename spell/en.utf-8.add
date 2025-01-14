@@ -20,3 +20,7 @@ json
 jupiter
 api
 v1
+yaml
+goroutines
+cmd
+os

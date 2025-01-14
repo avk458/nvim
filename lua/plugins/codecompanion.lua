@@ -4,26 +4,30 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "hrsh7th/nvim-cmp", -- Optional: For using slash commands and variables in the chat buffer
-      "nvim-telescope/telescope.nvim", -- Optional: For using slash commands
-      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
-      { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves `vim.ui.select`
     },
     config = true,
     opts = {
-      strategies = {
-        chat = {
-          adapter = "ollama",
-        },
-      },
       adapters = {
-        ollama = function()
-          return require("codecompanion.adapters").extend("ollama", {
+        deepseek = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
             env = {
-              url = "http://192.168.50.189:11434",
+              url = "https://api.deepseek.com", -- optional: default value is ollama url http://127.0.0.1:11434
+              chat_url = "/chat/completions", -- optional: default value, override if different
             },
           })
         end,
+      },
+      strategies = {
+        chat = {
+          adapter = "deepseek",
+        },
+        inline = {
+          adapter = "deepseek",
+        },
+      },
+      opts = {
+        -- Set debug logging
+        log_level = "DEBUG",
       },
     },
   },
